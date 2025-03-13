@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { useAuthenticator } from '@aws-amplify/ui-react';
-import { fetchUserAttributes } from "aws-amplify/auth";
 
 interface Message {
   role: 'user' | 'assistant';
@@ -15,18 +13,11 @@ const generateGradient = (role: 'user' | 'assistant') => {
 };
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [userAttributes, setUserAttributes] = useState<Record<string, string | undefined> | undefined>();
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
-  const { signOut } = useAuthenticator();
 
-  console.log(userAttributes);
   useEffect(() => {
     async function getUserAttributes() {
-      const attributes = await fetchUserAttributes();
-      setUserAttributes(attributes);
-      setIsLoading(false);
     }
     getUserAttributes();
   }, []);
@@ -49,9 +40,6 @@ function App() {
     setInputMessage('');
   };
 
-  if (isLoading) {
-    return null;
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-brand-bg-dark via-brand-bg-light to-brand-bg-dark">
@@ -59,12 +47,6 @@ function App() {
       <header className="bg-brand-surface-dark backdrop-blur-md border-b border-brand-surface-border fixed top-0 w-full z-10">
         <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
           <h1 className="text-2xl font-light text-brand-text-primary">Jam Statz</h1>
-          <button
-            onClick={signOut}
-            className="px-4 py-2 text-sm text-brand-text-secondary hover:text-brand-text-primary transition-colors duration-200"
-          >
-            Sign out
-          </button>
         </div>
       </header>
 
