@@ -1,1 +1,13 @@
-.aider*
+# Vite React app
+node_modules/
+dist/
+build/
+
+# Go app
+bin/
+pkg/
+*.exe
+*.test
+*.pb.go
+*.pb.gw.go
+_obj/
