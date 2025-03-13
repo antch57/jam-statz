@@ -12,3 +12,7 @@ pkg/
 *.pb.gw.go
 _obj/
 .aider*
+
+# CDK cache stuff
+.cdk.json
+cdk.out/
