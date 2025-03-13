@@ -11,3 +11,4 @@ pkg/
 *.pb.go
 *.pb.gw.go
 _obj/
+.aider*
