@@ -10,12 +10,10 @@ export default {
       colors: {
         brand: {
           bg: {
-            dark: '#0f172a',    // slate-900
-            light: '#1e1b4b',   // indigo-950
+            dark: '#374151',
           },
           accent: {
-            primary: '#8b5cf6',   // violet-500
-            secondary: '#d946ef', // fuchsia-500
+            primary: '#2e1065',
           },
           surface: {
             dark: 'rgba(15, 23, 42, 0.5)',    // slate-900/50
