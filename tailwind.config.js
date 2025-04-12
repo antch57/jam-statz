@@ -10,20 +10,22 @@ export default {
       colors: {
         brand: {
           bg: {
-            dark: '#374151',
+            dark: '#1e293b',    // blue-gray-800
+            light: '#334155',   // blue-gray-700
           },
           accent: {
-            primary: '#2e1065',
+            primary: '#0ea5e9',   // sky-500
+            secondary: '#14b8a6', // teal-500
           },
           surface: {
-            dark: 'rgba(15, 23, 42, 0.5)',    // slate-900/50
-            light: 'rgba(30, 27, 75, 0.5)',   // indigo-950/50
-            border: 'rgba(51, 65, 85, 0.5)',  // slate-700/50
+            dark: 'rgba(31, 41, 55, 0.7)',    // blue-gray-900/70
+            light: 'rgba(51, 65, 85, 0.7)',   // blue-gray-800/70
+            border: 'rgba(75, 85, 99, 0.7)',  // blue-gray-700/70
           },
           text: {
-            primary: '#ffffff',    // white
-            secondary: '#cbd5e1',  // slate-300
-            muted: '#94a3b8',      // slate-400
+            primary: '#f1f5f9',    // blue-gray-100
+            secondary: '#e2e8f0',  // blue-gray-200
+            muted: '#94a3b8',      // blue-gray-400
           }
         }
       },
