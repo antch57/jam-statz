@@ -1,8 +1,14 @@
 function Header() {
   return (
-    <header className="bg-brand-surface-dark backdrop-blur-md border-b border-brand-surface-border fixed top-0 w-full z-10">
-      <div className="max-w-6xl mx-auto flex justify-between items-center p-4">
-        <h1 className="text-2xl font-light text-brand-text-primary">Jam Statz</h1>
+    <header className="relative w-full h-96 overflow-hidden border-b border-brand-surface-border backdrop-blur-md z-10">
+      <img
+        src="/src/assets/band.png"
+        alt="Live Band Hero"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center px-4">
+        <h1 className="text-white text-5xl font-bold tracking-wide drop-shadow-lg">JamStats</h1>
+        <p className="text-white text-xl mt-2 font-light drop-shadow">– track live shows –</p>
       </div>
     </header>
   );
