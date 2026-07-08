@@ -11,8 +11,8 @@ export default defineConfig({
       manifest: {
         name: 'Jam Statz',
         short_name: 'JamStatz',
-        theme_color: '#6750a4',
-        background_color: '#000000',
+        theme_color: '#86865A',
+        background_color: '#EDEDE2',
         display: 'standalone',
         icons: [{ src: '/icon.svg', sizes: 'any', type: 'image/svg+xml' }],
       },

@@ -13,6 +13,7 @@
 	let mode = $state('light');
 
 	$effect(() => {
+		$page.url.pathname;
 		sidebarOpen = false;
 	});
 
@@ -49,13 +50,45 @@
 
 <svelte:head>
 	{@html pwaInfo ? pwaInfo.webManifest.linkTag : ''}
-	<meta name="theme-color" content="#6750a4" />
+	<meta name="theme-color" content={mode === 'dark' ? '#5A5535' : '#86865A'} />
 </svelte:head>
 
-<div class="min-h-screen p-3 md:p-5 space-y-4">
-	<!-- Sticky AppBar -->
-	<div class="sticky top-3 z-50 card rounded-2xl shadow-sm border border-surface-300-700 overflow-hidden">
-		<AppBar>
+<div class="h-screen grid grid-rows-[auto_1fr_auto] p-3 md:p-5 gap-4">
+	<!-- Mobile sidebar overlay -->
+	{#if sidebarOpen}
+		<div
+			class="fixed inset-0 z-40 bg-black/50 md:hidden"
+			onclick={() => (sidebarOpen = false)}
+			role="presentation"
+		></div>
+		<aside class="fixed left-0 top-0 z-50 h-full w-64 p-3 pt-20 md:hidden">
+			<Navigation
+				layout="sidebar"
+				class="card rounded-2xl shadow-sm border border-surface-300-700 grid h-full grid-rows-[1fr_auto] gap-4 p-2 bg-surface-100-900"
+			>
+				<Navigation.Content>
+					<Navigation.Group>
+						<Navigation.Menu>
+							{#each links as link (link.href)}
+								{@const Icon = link.icon}
+								<Navigation.TriggerAnchor
+									href={link.href}
+									aria-current={isActive(link.href) ? 'page' : undefined}
+								>
+									<Icon class="size-4" />
+									<Navigation.TriggerText>{link.label}</Navigation.TriggerText>
+								</Navigation.TriggerAnchor>
+							{/each}
+						</Navigation.Menu>
+					</Navigation.Group>
+				</Navigation.Content>
+			</Navigation>
+		</aside>
+	{/if}
+
+	<!-- Header -->
+	<div class="card rounded-2xl shadow-sm border border-surface-300-700 overflow-hidden">
+		<AppBar class="bg-surface-100-900">
 			<AppBar.Toolbar class="grid-cols-[auto_1fr_auto]">
 				<AppBar.Lead>
 					<button
@@ -87,44 +120,12 @@
 		</AppBar>
 	</div>
 
-	<!-- Sidebar + Main grid -->
-	<div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4">
-		<!-- Mobile sidebar -->
-		{#if sidebarOpen}
-			<div
-				class="fixed inset-0 z-40 bg-black/50 md:hidden"
-				onclick={() => (sidebarOpen = false)}
-				role="presentation"
-			></div>
-			<aside class="fixed left-0 top-0 z-50 h-full w-64 p-3 pt-20 md:hidden">
-				<Navigation
-					layout="sidebar"
-					class="card rounded-2xl shadow-sm border border-surface-300-700 grid h-full grid-rows-[1fr_auto] gap-4 p-2"
-				>
-					<Navigation.Content>
-						<Navigation.Group>
-							<Navigation.Menu>
-								{#each links as link (link.href)}
-									{@const Icon = link.icon}
-									<Navigation.TriggerAnchor
-										href={link.href}
-										aria-current={isActive(link.href) ? 'page' : undefined}
-									>
-										<Icon class="size-4" />
-										<Navigation.TriggerText>{link.label}</Navigation.TriggerText>
-									</Navigation.TriggerAnchor>
-								{/each}
-							</Navigation.Menu>
-						</Navigation.Group>
-					</Navigation.Content>
-				</Navigation>
-			</aside>
-		{/if}
-
+	<!-- Sidebar + Main -->
+	<div class="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-4 overflow-hidden min-h-0">
 		<!-- Desktop sidebar -->
 		<Navigation
 			layout="sidebar"
-			class="hidden md:grid card rounded-2xl shadow-sm border border-surface-300-700 grid-rows-[1fr_auto] gap-4 p-2"
+			class="hidden md:grid card rounded-2xl shadow-sm border border-surface-300-700 grid-rows-[1fr_auto] gap-4 p-2 bg-surface-100-900 overflow-y-auto"
 		>
 			<Navigation.Content>
 				<Navigation.Group>
@@ -145,13 +146,13 @@
 		</Navigation>
 
 		<!-- Main Content -->
-		<main class="card rounded-2xl shadow-sm border border-surface-300-700 p-6">
+		<main class="card rounded-2xl shadow-sm border border-surface-300-700 p-6 overflow-y-auto">
 			{@render children()}
 		</main>
 	</div>
 
 	<!-- Footer -->
-	<footer class="card rounded-2xl shadow-sm border border-surface-300-700 py-4 text-center text-sm opacity-70">
+	<footer class="card rounded-2xl shadow-sm border border-surface-300-700 p-6 text-center text-sm bg-surface-100-900">
 		jam-statz &copy; 2026
 	</footer>
 </div>
