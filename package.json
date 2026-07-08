@@ -1,0 +1,22 @@
+{
+  "name": "jam-statz",
+  "private": true,
+  "type": "module",
+  "license": "ISC",
+  "author": "Anthony Chiarello",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "^7.0.1",
+    "@sveltejs/kit": "^2.69.2",
+    "@vite-pwa/sveltekit": "^1.1.0",
+    "prettier": "^3.8.3",
+    "svelte": "^5.56.4",
+    "vite": "^8.1.3"
+  }
+}
