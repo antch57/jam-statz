@@ -1,8 +1,14 @@
 <!doctype html>
-<html lang="en" data-theme="pine">
+<html lang="en" data-theme="pine" data-mode="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function() {
+        var mode = localStorage.getItem('mode');
+        if (mode) document.documentElement.setAttribute('data-mode', mode);
+      })();
+    </script>
     %sveltekit.head%
   </head>
   <body>

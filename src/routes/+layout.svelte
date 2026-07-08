@@ -5,15 +5,27 @@
 	import { page } from '$app/stores';
 	import { AppBar } from '@skeletonlabs/skeleton-svelte';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
-	import { Calendar, CircleUser, Clock, LayoutDashboard, Menu, Search, Users } from '@lucide/svelte';
+	import { Calendar, CircleUser, Clock, LayoutDashboard, Menu, Moon, Search, Sun, Users } from '@lucide/svelte';
 
 	let { children } = $props();
 
 	let sidebarOpen = $state(false);
+	let mode = $state('light');
 
 	$effect(() => {
 		sidebarOpen = false;
 	});
+
+	$effect(() => {
+		mode = localStorage.getItem('mode') || 'light';
+	});
+
+	function toggleMode() {
+		const next = mode === 'dark' ? 'light' : 'dark';
+		document.documentElement.setAttribute('data-mode', next);
+		localStorage.setItem('mode', next);
+		mode = next;
+	}
 
 	const links = [
 		{ label: 'Dashboard', href: '/', icon: LayoutDashboard },
@@ -62,6 +74,13 @@
 				</AppBar.Headline>
 				<AppBar.Trail>
 					<button type="button" class="btn-icon hover:preset-tonal"><Search class="size-6" /></button>
+					<button type="button" class="btn-icon hover:preset-tonal" onclick={toggleMode}>
+						{#if mode === 'dark'}
+							<Sun class="size-6" />
+						{:else}
+							<Moon class="size-6" />
+						{/if}
+					</button>
 					<button type="button" class="btn-icon hover:preset-tonal"><CircleUser class="size-6" /></button>
 				</AppBar.Trail>
 			</AppBar.Toolbar>
