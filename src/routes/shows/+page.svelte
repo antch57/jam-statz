@@ -1,15 +1,19 @@
 <script>
 	import { shows } from '$lib/data/shows.js';
+	import PageHeader from '$lib/components/PageHeader.svelte';
+	import ShowCard from '$lib/components/ShowCard.svelte';
 	import { Search } from '@lucide/svelte';
 
 	let query = $state('');
 	let sortOrder = $state('newest');
 
-	const sorted = $derived.by(() => {
-		const sorted = [...shows].sort((a, b) => {
-			const diff = new Date(b.date) - new Date(a.date);
-			return sortOrder === 'newest' ? diff : -diff;
-		});
+	const filtered = $derived.by(() => {
+		const sorted = [...shows]
+			.filter((s) => s.attended)
+			.sort((a, b) => {
+				const diff = new Date(b.date) - new Date(a.date);
+				return sortOrder === 'newest' ? diff : -diff;
+			});
 		if (!query) return sorted;
 		const q = query.toLowerCase();
 		return sorted.filter(
@@ -21,8 +25,7 @@
 	});
 </script>
 
-<h1 class="h1">Shows</h1>
-<p class="text-lg opacity-70 mt-1 mb-8">Browse your show history.</p>
+<PageHeader title="Shows" subtitle="Browse your show history." />
 
 <!-- Search + Sort -->
 <div class="flex items-center gap-3 mb-6">
@@ -41,26 +44,13 @@
 	</select>
 </div>
 
-<!-- Show cards -->
+<p class="text-sm opacity-50 mb-4">{filtered.length} show{filtered.length !== 1 ? 's' : ''}</p>
+
 <div class="space-y-3">
-	{#each sorted as show (show.id)}
-		<div class="card p-4">
-			<div class="flex items-start justify-between">
-				<div>
-					<p class="font-semibold text-lg">{show.artist}</p>
-					<p class="text-sm opacity-60">{show.venue}, {show.city}</p>
-					<p class="text-xs opacity-50 mt-0.5">{show.date}</p>
-					{#if show.notes}
-						<p class="text-sm mt-2 italic opacity-70">"{show.notes}"</p>
-					{/if}
-				</div>
-				<div class="text-right">
-					<p class="font-mono text-sm">{'★'.repeat(show.rating)}{'☆'.repeat(5 - show.rating)}</p>
-				</div>
-			</div>
-		</div>
+	{#each filtered as show (show.id)}
+		<ShowCard {show} />
 	{/each}
-	{#if sorted.length === 0}
+	{#if filtered.length === 0}
 		<p class="text-center py-12 opacity-50">No shows match your search.</p>
 	{/if}
 </div>

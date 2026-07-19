@@ -5,7 +5,7 @@
 	import { page } from '$app/stores';
 	import { AppBar } from '@skeletonlabs/skeleton-svelte';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
-	import { Calendar, CircleUser, Clock, LayoutDashboard, Menu, Moon, Search, Sun, Users } from '@lucide/svelte';
+	import { Calendar, CircleUser, Clock, LayoutDashboard, MapPin, Menu, Moon, Search, Sun, Users } from '@lucide/svelte';
 
 	let { children } = $props();
 
@@ -32,6 +32,7 @@
 		{ label: 'Dashboard', href: '/', icon: LayoutDashboard },
 		{ label: 'Artists', href: '/artists', icon: Users },
 		{ label: 'Shows', href: '/shows', icon: Calendar },
+		{ label: 'Venues', href: '/venues', icon: MapPin },
 		{ label: 'History', href: '/history', icon: Clock },
 	];
 
@@ -71,20 +72,21 @@
 						<Navigation.Menu>
 							{#each links as link (link.href)}
 								{@const Icon = link.icon}
-								<Navigation.TriggerAnchor
-									href={link.href}
-									aria-current={isActive(link.href) ? 'page' : undefined}
-								>
-									<Icon class="size-4" />
-									<Navigation.TriggerText>{link.label}</Navigation.TriggerText>
-								</Navigation.TriggerAnchor>
-							{/each}
-						</Navigation.Menu>
-					</Navigation.Group>
-				</Navigation.Content>
-			</Navigation>
-		</aside>
-	{/if}
+						<Navigation.TriggerAnchor
+							href={link.href}
+							aria-current={isActive(link.href) ? 'page' : undefined}
+							class={isActive(link.href) ? 'preset-tonal-primary' : ''}
+						>
+							<Icon class="size-4" />
+							<Navigation.TriggerText>{link.label}</Navigation.TriggerText>
+						</Navigation.TriggerAnchor>
+					{/each}
+				</Navigation.Menu>
+			</Navigation.Group>
+		</Navigation.Content>
+	</Navigation>
+</aside>
+{/if}
 
 	<!-- Header -->
 	<div class="card rounded-2xl shadow-sm border border-surface-300-700 overflow-hidden">
@@ -132,27 +134,28 @@
 					<Navigation.Menu>
 						{#each links as link (link.href)}
 							{@const Icon = link.icon}
-							<Navigation.TriggerAnchor
-								href={link.href}
-								aria-current={isActive(link.href) ? 'page' : undefined}
-							>
-								<Icon class="size-4" />
-								<Navigation.TriggerText>{link.label}</Navigation.TriggerText>
-							</Navigation.TriggerAnchor>
-						{/each}
-					</Navigation.Menu>
-				</Navigation.Group>
-			</Navigation.Content>
-		</Navigation>
+						<Navigation.TriggerAnchor
+							href={link.href}
+							aria-current={isActive(link.href) ? 'page' : undefined}
+							class={isActive(link.href) ? 'preset-tonal-primary' : ''}
+						>
+							<Icon class="size-4" />
+							<Navigation.TriggerText>{link.label}</Navigation.TriggerText>
+						</Navigation.TriggerAnchor>
+					{/each}
+				</Navigation.Menu>
+			</Navigation.Group>
+		</Navigation.Content>
+	</Navigation>
 
-		<!-- Main Content -->
-		<main class="card rounded-2xl shadow-sm border border-surface-300-700 p-6 overflow-y-auto">
-			{@render children()}
-		</main>
-	</div>
+	<!-- Main Content -->
+	<main class="card rounded-2xl shadow-sm border border-surface-300-700 p-6 overflow-y-auto">
+		{@render children()}
+	</main>
+</div>
 
-	<!-- Footer -->
-	<footer class="card rounded-2xl shadow-sm border border-surface-300-700 p-6 text-center text-sm bg-surface-100-900">
-		jam-statz &copy; 2026
-	</footer>
+<!-- Footer -->
+<footer class="text-center text-xs opacity-40 py-2">
+	jam-statz &copy; 2026
+</footer>
 </div>
