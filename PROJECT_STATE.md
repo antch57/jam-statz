@@ -59,7 +59,7 @@ jam-statz/
 | icons     | lucide-svelte                                      |
 | pwa       | `@vite-pwa/sveltekit` (workbox sw + auto manifest) |
 | build     | vite 8                                             |
-| theme     | pine (olive/khaki earth tones)                     |
+| theme     | mona (purple/green/teal psychedelic)               |
 
 ## pages
 

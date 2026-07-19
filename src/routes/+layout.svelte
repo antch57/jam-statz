@@ -5,7 +5,7 @@
 	import { page } from '$app/stores';
 	import { AppBar } from '@skeletonlabs/skeleton-svelte';
 	import { Navigation } from '@skeletonlabs/skeleton-svelte';
-	import { Calendar, CircleUser, Clock, LayoutDashboard, MapPin, Menu, Moon, Search, Sun, Users } from '@lucide/svelte';
+	import { Calendar, CircleUser, LayoutDashboard, MapPin, Menu, Moon, Search, Sun, Users } from '@lucide/svelte';
 
 	let { children } = $props();
 
@@ -33,7 +33,6 @@
 		{ label: 'Artists', href: '/artists', icon: Users },
 		{ label: 'Shows', href: '/shows', icon: Calendar },
 		{ label: 'Venues', href: '/venues', icon: MapPin },
-		{ label: 'History', href: '/history', icon: Clock },
 	];
 
 	function isActive(href) {
@@ -51,10 +50,10 @@
 
 <svelte:head>
 	{@html pwaInfo ? pwaInfo.webManifest.linkTag : ''}
-	<meta name="theme-color" content={mode === 'dark' ? '#5A5535' : '#86865A'} />
+	<meta name="theme-color" content={mode === 'dark' ? '#2c1e3d' : '#8b5cf6'} />
 </svelte:head>
 
-<div class="h-screen grid grid-rows-[auto_1fr_auto] p-3 md:p-5 gap-4">
+<div class="h-screen grid grid-rows-[auto_1fr_auto] p-3 md:p-5 pb-[calc(0.75rem+env(safe-area-inset-bottom))] md:pb-[calc(1.25rem+env(safe-area-inset-bottom))] gap-4">
 	<!-- Mobile sidebar overlay -->
 	{#if sidebarOpen}
 		<div
@@ -107,7 +106,7 @@
 				<AppBar.Headline>
 					<a href="/" class="text-2xl font-bold no-underline tracking-tight">jam-statz</a>
 				</AppBar.Headline>
-				<AppBar.Trail>
+				<AppBar.Trail class="gap-1">
 					<button type="button" class="btn-icon hover:preset-tonal"><Search class="size-6" /></button>
 					<button type="button" class="btn-icon hover:preset-tonal" onclick={toggleMode}>
 						{#if mode === 'dark'}
@@ -149,7 +148,7 @@
 	</Navigation>
 
 	<!-- Main Content -->
-	<main class="card rounded-2xl shadow-sm border border-surface-300-700 p-6 overflow-y-auto">
+	<main class="card rounded-2xl shadow-sm border border-surface-300-700 p-4 md:p-6 overflow-y-auto">
 		{@render children()}
 	</main>
 </div>

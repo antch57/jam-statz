@@ -8,11 +8,14 @@ export default defineConfig({
     tailwindcss(),
     sveltekit(),
     SvelteKitPWA({
+      workbox: {
+        cleanupOutdatedCaches: true,
+      },
       manifest: {
         name: 'Jam Statz',
         short_name: 'JamStatz',
-        theme_color: '#86865A',
-        background_color: '#EDEDE2',
+        theme_color: '#8b5cf6',
+        background_color: '#ffffff',
         display: 'standalone',
         icons: [{ src: '/icon.svg', sizes: 'any', type: 'image/svg+xml' }],
       },

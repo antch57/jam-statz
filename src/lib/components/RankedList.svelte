@@ -14,7 +14,7 @@
 			<li>
 				<a
 					href={item.href}
-					class="flex items-center justify-between py-1 border-b border-surface-200-800 last:border-0 no-underline hover:opacity-80 transition"
+					class="flex items-center justify-between py-2.5 border-b border-surface-200-800 last:border-0 no-underline hover:opacity-80 transition"
 				>
 					<div class="flex items-center gap-3">
 						<span class="text-xs font-mono opacity-40 w-4">{i + 1}</span>

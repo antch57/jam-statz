@@ -24,7 +24,7 @@
 
 <PageHeader title="Dashboard" subtitle="Your show tracking at a glance." />
 
-<div class="grid grid-cols-3 gap-4 mb-8">
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
 	<StatCard icon={Music} label="Total Shows" value={stats.totalShows} href="/shows" />
 	<StatCard icon={Users} label="Artists" value={stats.totalArtists} href="/artists" />
 	<StatCard icon={MapPin} label="Venues" value={stats.uniqueVenues} href="/venues" />
