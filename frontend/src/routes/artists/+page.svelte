@@ -1,7 +1,9 @@
 <script>
-	import { artists } from '$lib/data/artists.js';
 	import PageHeader from '$lib/components/PageHeader.svelte';
 	import { Music } from '@lucide/svelte';
+
+	let { data } = $props();
+	let artists = $derived(data.items);
 </script>
 
 <PageHeader title="Artists" subtitle="All the jam bands you've tracked." />

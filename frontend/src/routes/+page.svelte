@@ -1,25 +1,28 @@
 <script>
-	import { stats } from '$lib/data/stats.js';
-	import { getRecentShows } from '$lib/data/shows.js';
 	import StatCard from '$lib/components/StatCard.svelte';
 	import PageHeader from '$lib/components/PageHeader.svelte';
 	import RankedList from '$lib/components/RankedList.svelte';
 	import { Music, Users, MapPin, Trophy, Clock } from '@lucide/svelte';
 
-	const recent = getRecentShows(5);
+	let { data } = $props();
+	let { stats, recent } = $derived(data);
 
-	const topArtistItems = stats.topArtists.map((a) => ({
-		name: a.name,
-		value: a.count,
-		href: `/artists/${a.id}`,
-	}));
+	const topArtistItems = $derived(
+		stats.topArtists.map((a) => ({
+			name: a.name,
+			value: a.count,
+			href: `/artists/${a.id}`,
+		}))
+	);
 
-	const topVenueItems = stats.topVenues.map((v) => ({
-		name: v.venue,
-		subtext: v.city,
-		value: v.count,
-		href: `/venues/${encodeURIComponent(v.venue)}`,
-	}));
+	const topVenueItems = $derived(
+		stats.topVenues.map((v) => ({
+			name: v.venue,
+			subtext: v.city,
+			value: v.count,
+			href: `/venues/${v.slug}`,
+		}))
+	);
 </script>
 
 <PageHeader title="Dashboard" subtitle="Your show tracking at a glance." />

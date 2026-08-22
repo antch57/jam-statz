@@ -21,4 +21,11 @@ export default defineConfig({
       },
     }),
   ],
+  build: {
+    rollupOptions: {
+      checks: {
+        pluginTimings: false,
+      },
+    },
+  },
 });

@@ -1,9 +1,10 @@
 <script>
-	import { shows } from '$lib/data/shows.js';
 	import PageHeader from '$lib/components/PageHeader.svelte';
 	import ShowCard from '$lib/components/ShowCard.svelte';
 	import { Search } from '@lucide/svelte';
 
+	let { data } = $props();
+	let shows = $derived(data.items);
 	let query = $state('');
 	let sortOrder = $state('newest');
 
